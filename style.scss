@@ -1,0 +1,126 @@
+$orange: #fe781f;
+$gris: #E7E5E5;
+
+main {
+    background-color: $gris;
+}
+
+nav {
+    background-color: $orange;
+    height: 80px;
+  
+    ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      list-style: none;
+    }
+  
+    li {
+      margin: 0 10px;
+    }
+  
+    a {
+        color: #fff; // Couleur du texte
+        text-decoration: none; // Supprime le soulignement par défaut
+        font-size: 16px;
+        line-height: 24px;
+        &:hover {
+          text-decoration: underline; // Souligne le texte
+          text-underline-offset: 5px; // Définit la distance entre le texte et le soulignement
+          color: #fff; // Couleur du texte au survol
+  }
+}
+}
+
+  footer {
+    background-color: $orange;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; // Ajoutez une marge intérieure pour l'espace entre les éléments
+    // ...
+  }
+  
+  footer ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  footer ul li {
+    margin-right: 20px; // Ajoutez une marge droite pour séparer les éléments
+  }
+  
+    h3 {
+      text-align: right;
+      margin: 0;
+    }
+  
+    li {
+      margin: 0 10px;
+    }
+  
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  
+  @mixin ring($color, $size) {
+    width: $size;
+    height: $size;
+    background-color: transparent;
+    border-radius: 50%;
+    border: $size/10 solid $color;
+    filter: drop-shadow($size/25 $size/25 1.5px darken($color, 15%));
+}
+
+@mixin multiRings {
+    $lastSize: 20px;
+    $lastPosition: -126px;
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        $size: $lastSize * 1.2;
+        $newPosition: $lastPosition + $lastSize * 0.7;
+        left: $newPosition;
+        @include ring(#000000, $size);
+        $lastSize: $size;
+        $lastPosition: $newPosition;
+      }
+    }
+}
+
+p {
+    font-size: 2.5rem;
+    margin: 1rem;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+    > .my-precious {
+        display: flex;
+        align-items: center;
+        > .ring-red {
+            @include ring($orange, 50px)
+        }
+    }
+    > .one-ring {
+        display: flex;
+        align-items: center;
+        > .ring-yellow {
+            @include ring(#fcca03, 150px)
+        }
+    }
+    > .multi-rings {
+        display: flex;
+        align-items: center;
+        position: relative;
+        > div {
+            position: absolute;
+            @include multiRings;
+        }
+    }
+}
